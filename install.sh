@@ -45,9 +45,12 @@ then
 		# DOCKER
 		brew uninstall -f docker docker-compose
 		if [ ! -d "/Applications/Docker.app" ] && [ ! -d "~/Applications/Docker.app" ]; then
-			echo $'\033[0;34m'Please install $'\033[1;96m'Docker for Mac $'\033[0;34m'from the MSC \(Managed Software Center\)$'\033[0;39m'
-			open -a "Managed Software Center"
-			read -p $'\033[0;34m'Press\ RETURN\ when\ you\ have\ successfully\ installed\ $'\033[1;96m'Docker\ for\ Mac$'\033[0;34m'...$'\033[0;39m'
+			#echo $'\033[0;34m'Please install $'\033[1;96m'Docker for Mac $'\033[0;34m'from the MSC \(Managed Software Center\)$'\033[0;39m'
+			#open -a "Managed Software Center"
+			#read -p $'\033[0;34m'Press\ RETURN\ when\ you\ have\ successfully\ installed\ $'\033[1;96m'Docker\ for\ Mac$'\033[0;34m'...$'\033[0;39m'
+			echo "Docker not installed, installing..."
+			brew install docker
+			#brew cask install docker
 		fi
 		pkill Docker
 		if [ ! -d $docker_destination ]; then
