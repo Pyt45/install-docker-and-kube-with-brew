@@ -52,19 +52,12 @@ then
 			brew install docker
 			#brew cask install docker
 		fi
-		pkill Docker
+		#pkill Docker
 		if [ ! -d $docker_destination ]; then
 			rm -rf ~/Library/Containers/com.docker.docker ~/.docker
 			mkdir -p $docker_destination/{com.docker.docker,.docker}
 			ln -sf $docker_destination/com.docker.docker ~/Library/Containers/com.docker.docker
 			ln -sf $docker_destination/.docker ~/.docker
-		fi
-		
-		# Check if docker is running
-		docker_state=$(docker info >/dev/null 2>&1)
-		if [[ $? -ne 0 ]]; then
-			echo "Opening Docker..."
-			open -g -a Docker > /dev/null
 		fi
 
 		# DOCKER-MACHINE
@@ -82,7 +75,16 @@ then
 
 		# Launch docker-machine
 		docker-machine create --driver virtualbox default > /dev/null
+		docker-machine env default
+		eval $(docker-machine env default)
 		docker-machine start
+
+		# Check if docker is running
+		#docker_state=$(docker info >/dev/null 2>&1)
+		#if [[ $? -ne 0 ]]; then
+		#	echo "Opening Docker..."
+		#	open -g -a Docker > /dev/null
+		#fi
 
 		# Launch Minikube
 		minikube start --cpus=2 --disk-size 11000 --vm-driver virtualbox --extra-config=apiserver.service-node-port-range=1-35000
