@@ -100,3 +100,17 @@ then
 		runtime=$((pre_config_end-pre_config_start))
 		echo "Pre-config done - $runtime seconds)"
 fi
+
+
+##!/bin/bash
+
+#docker-machine ls > /dev/null
+#OUTPUT=$(docker-machine ls | awk '{print $1}' | grep default)
+#if [[ $OUTPUT != 'default' ]]; then # we will add more complex testing like docker-machine status
+#    docker-machine create --driver virtualbox default > /dev/null
+#    docker-machine env default
+#    eval $(docker-machine env default)
+#    docker-machine start
+#fi
+#
+
